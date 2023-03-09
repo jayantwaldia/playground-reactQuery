@@ -11,19 +11,34 @@ const fetchUser = ({ queryKey }: any) => {
 
 const fetchFrameworks = (channelId: any) => {
   return axios
-    .get(`http://localhost:4000/channels/${channelId}`)
+    .get(`http://localhost:4000/chanels/${channelId}`)
     .then((res) => res.data);
 };
 
 export const DependentQueriespage = ({ email }: any) => {
   const { data: user } = useQuery(['user', email], fetchUser);
   const channelId = user?.channelId;
-  const { data: channels } = useQuery(
-    ['courses', channelId],
-    () => fetchFrameworks(channelId),
-    {
-      enabled: !!channelId,
-    }
+  const {
+    error,
+    data: channels,
+    isError,
+    isLoading,
+  } = useQuery(['courses', channelId], () => fetchFrameworks(channelId), {
+    enabled: !!channelId,
+  });
+  if (isLoading) return <p>Loading...</p>;
+  if (isError) return <p>{error?.message}</p>;
+  return (
+    <div>
+      <p>
+        User Email : {email}, channelId : {user?.channelId}
+      </p>
+      <p>Channels List :</p>
+      <ul>
+        {channels?.courses?.map((channel: string) => (
+          <li key={channel}>{channel}</li>
+        ))}
+      </ul>
+    </div>
   );
-  return <div>Ok</div>;
 };
