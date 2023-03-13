@@ -11,7 +11,7 @@ const fetchUser = ({ queryKey }: any) => {
 
 const fetchFrameworks = (channelId: any) => {
   return axios
-    .get(`http://localhost:4000/chanels/${channelId}`)
+    .get(`http://localhost:4000/channels/${channelId}`)
     .then((res) => res.data);
 };
 
