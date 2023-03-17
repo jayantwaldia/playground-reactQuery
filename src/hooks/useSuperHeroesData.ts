@@ -1,8 +1,12 @@
 import axios from 'axios';
-import { useQuery } from 'react-query';
+import { useQuery, useMutation } from 'react-query';
 
 const fetchSuperHeroes = () => {
   return axios.get('http://localhost:4000/superheroes').then((res) => res.data);
+};
+
+const addSuperHero = (hero: any) => {
+  return axios.post('http://localhost:4000/superheroes', hero);
 };
 
 export const useSuperHeroesData = (onSuccess: any, onError: any) => {
@@ -18,4 +22,8 @@ export const useSuperHeroesData = (onSuccess: any, onError: any) => {
     // refetchIntervalInBackground: true, // fetches even the browser is not in focus
     // select: (data) => {}, used to transform and return the data via map, filter operations.});
   });
+};
+
+export const useAddSuperHeroData = () => {
+  return useMutation(addSuperHero);
 };
