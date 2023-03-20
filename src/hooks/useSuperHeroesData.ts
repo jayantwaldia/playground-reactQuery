@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useQuery, useMutation } from 'react-query';
+import { useQuery, useMutation, useQueryClient } from 'react-query';
 
 const fetchSuperHeroes = () => {
   return axios.get('http://localhost:4000/superheroes').then((res) => res.data);
@@ -13,7 +13,7 @@ export const useSuperHeroesData = (onSuccess: any, onError: any) => {
   return useQuery('super-heroes', fetchSuperHeroes, {
     onSuccess,
     onError,
-    enabled: false, // disables auto fetch when component mounts
+    // enabled: false, // disables auto fetch when component mounts
     // staleTime: 30000,
     // refetchOnMount: true, // when a component mounts
     //refetchOnWindowFocus: 'always', // when tab switches
@@ -25,5 +25,10 @@ export const useSuperHeroesData = (onSuccess: any, onError: any) => {
 };
 
 export const useAddSuperHeroData = () => {
-  return useMutation(addSuperHero);
+  const queryClient = useQueryClient();
+  return useMutation(addSuperHero, {
+    onSuccess: () => {
+      queryClient.invalidateQueries('super-heroes');
+    },
+  });
 };

@@ -19,6 +19,26 @@
       "name": "The Flash",
       "alterEgo": "Barry Allen",
       "id": 4
+    },
+    {
+      "name": "Shaktiman",
+      "alterEgo": "Gangadhar",
+      "id": 5
+    },
+    {
+      "name": "Shazam",
+      "alterEgo": "Billy",
+      "id": 6
+    },
+    {
+      "name": "Spiderman",
+      "alterEgo": "Tom",
+      "id": 7
+    },
+    {
+      "name": "Iron man",
+      "alterEgo": "Robert",
+      "id": 8
     }
   ],
   "friends": [
