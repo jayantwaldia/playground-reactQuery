@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useQuery, useMutation, useQueryClient } from 'react-query';
 
 const fetchSuperHeroes = () => {
-  return axios.get('http://localhost:4000/superheroes').then((res) => res.data);
+  return axios.get('http://localhost:4000/superheroes');
 };
 
 const addSuperHero = (hero: any) => {
@@ -27,8 +27,14 @@ export const useSuperHeroesData = (onSuccess: any, onError: any) => {
 export const useAddSuperHeroData = () => {
   const queryClient = useQueryClient();
   return useMutation(addSuperHero, {
-    onSuccess: () => {
-      queryClient.invalidateQueries('super-heroes');
+    onSuccess: (data: any) => {
+      // queryClient.invalidateQueries('super-heroes');
+      queryClient.setQueryData('super-heroes', (oldQueryData: any) => {
+        return {
+          ...oldQueryData,
+          data: [...oldQueryData.data, data.data],
+        };
+      });
     },
   });
 };

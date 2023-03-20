@@ -39,6 +39,21 @@
       "name": "Iron man",
       "alterEgo": "Robert",
       "id": 8
+    },
+    {
+      "name": "Catwoman",
+      "alterEgo": "Selina Kyle",
+      "id": 9
+    },
+    {
+      "name": "Top Gun",
+      "alterEgo": "Maverick",
+      "id": 10
+    },
+    {
+      "name": "Thor",
+      "alterEgo": "God",
+      "id": 11
     }
   ],
   "friends": [

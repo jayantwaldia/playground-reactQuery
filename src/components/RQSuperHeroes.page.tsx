@@ -42,12 +42,10 @@ export const RQSuperHeroesPage = () => {
         <button onClick={handleAddHeroClick}>Add Hero</button>
       </div>
       <button onClick={refetch}>Fetch Heroes</button>
-      {data?.map((hero: any) => {
+      {data?.data?.map((hero: any) => {
         return (
           <div key={hero.id}>
-            <Link to={`/rq-super-heroes/${hero.id}`}>
-              {hero.name} : {hero.alterEgo}
-            </Link>
+            <Link to={`/rq-super-heroes/${hero.id}`}>{hero.name}</Link>
           </div>
         );
       })}
